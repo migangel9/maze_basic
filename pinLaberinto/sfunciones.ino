@@ -115,7 +115,7 @@ void girar(short limiteTiempo, boolean direccion, byte velocidad){///
   }
   for(;;){
     if((millis() - actual) > limiteTiempo){
-       paraMotores();
+       paroTotal();
        break;
     }
   }
@@ -123,11 +123,19 @@ void girar(short limiteTiempo, boolean direccion, byte velocidad){///
 
 void paraMotores() {
   analogWrite(pinMotorIzq1, 0);
+  analogWrite(pinMotorIzq2, -velocidadGlobal);
+  analogWrite(pinMotorDer1, 0);  
+  analogWrite(pinMotorDer2, -velocidadGlobal);
+  delayMicroseconds(3);
+  paroTotal();  
+}
+
+void paroTotal(){
+  analogWrite(pinMotorIzq1, 0);
   analogWrite(pinMotorIzq2, 0);
   analogWrite(pinMotorDer1, 0);  
   analogWrite(pinMotorDer2, 0);
 }
-
 
 /*Funcion para girar motor*/
 void giraMotor(byte pinMotor1, byte pinMotor2, boolean direccion, byte velocidad) {
@@ -179,7 +187,7 @@ void porIzquierda(long uDer, long uIzq, long uFront, long uBack, int Rango){
     paraMotores();
     delay(2000);
     girar(giro180, false, velocidad1);
-    
+
     delay(2000);
   }
 }

@@ -1,15 +1,16 @@
 // Constantes de velocidad
 #define velocidad1 140
-#define velocidad2 70
+#define velocidad2 45
 
 //Constantes de control
-#define KP 1
+#define KP .80
+#define KD 20
 #define KI 0 
-#define KD 0
+
 
 //Constante de rango en cm
 #define rangoMenos 30
-#define rangoLimite 25
+#define rangoLimite 35
 #define rangoMas 80
 #define rangoSuperior 100
 
@@ -36,10 +37,10 @@
 /* Variables Globales */
 
 //variables de control
-float Err=0;
-float PreErr=0;
-float Integral=0;
-float Derivativo=0;
+float Err = 0;
+float PreErr = 0;
+float Integral = 0;
+float Derivativo = 0;
 float pid = 0;
 byte velocidadGlobal;
 
