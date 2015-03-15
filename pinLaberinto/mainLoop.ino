@@ -1,23 +1,27 @@
 void loop(){
+  velocidadGlobal = velocidad2;
+  asignaErrores();
 //  getDistancia(pinTrigFront, pinEchoFront);
   long uFront = getDistancia(pinTrigFront, pinEchoFront);
-  long uBack = getDistancia(pinTrigBack, pinEchoBack);
-  long uIzq = getDistancia(pinTrigIzq, pinEchoIzq);
+  //long uBack = getDistancia(pinTrigBack, pinEchoBack);
+  long uIzq = getDistancia(pinTrigIzq, pinEchoIzq);  
   long uDer = getDistancia(pinTrigDer, pinEchoDer);
- 
- /* Serial.print("F: ");
-  Serial.print(Ufront);
-  Serial.print(" cm\t");
-  Serial.print("B: ");
-  Serial.print(Uback);
-  Serial.print(" cm\t"); 
+  int Rango = getRango(uIzq,uDer);    
+  setCentrar(uIzq, uDer, Rango); 
+  porIzquierda(uDer, uIzq, uFront, 0, Rango);
+  Serial.print("\t R: ");
+  Serial.print(Rango);
+  Serial.print(" \t");  
+  Serial.print("F: ");
+  Serial.print(uFront);
+  Serial.print(" mm\t");
+  //Serial.print("B: ");
+  //Serial.print(uBack);
+  //Serial.print(" mm\t"); 
   Serial.print("I: ");
-  Serial.print(Uizq);
-  Serial.print(" cm\t");
+  Serial.print(uIzq);
+  Serial.print(" mm\t");
   Serial.print("D: ");
-  Serial.print(Uder);
-  Serial.println(" cm");
-  */
-
-  delay(50);
+  Serial.print(uDer);
+  Serial.println(" mm");
 }

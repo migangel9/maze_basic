@@ -1,6 +1,6 @@
 // PINES Motor Izq
-#define pinMotorIzq1	5  
-#define pinMotorIzq2	6  
+#define pinMotorIzq1	6  
+#define pinMotorIzq2	5  
 // PINES Motor Der
 #define pinMotorDer1	10  
 #define pinMotorDer2	11  

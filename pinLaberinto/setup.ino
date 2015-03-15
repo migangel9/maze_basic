@@ -1,6 +1,6 @@
 void setup()
 {
-	Serial.begin(9600); //inicia a porta serial 
+	Serial.begin(115200); //inicia a porta serial 
 	//Declara pines de sensores trig salida, echo entrada
 	pinMode(pinTrigFront, OUTPUT);
 	pinMode(pinEchoFront, INPUT);
