@@ -24,4 +24,6 @@ void setup()
 	//Declara pines del LED
 	pinMode(pinLed1,OUTPUT);
 	pinMode(pinLed2,OUTPUT);
+
+	inicializar();
 }
