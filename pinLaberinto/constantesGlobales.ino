@@ -1,6 +1,6 @@
 // Constantes de velocidad
 #define velocidad1 140
-#define velocidad2 60
+#define velocidad2 65
 
 //Constantes de control
 //#define KP 0.20
@@ -12,7 +12,7 @@
 
 //Constante de rango en cm
 //#define rangoMenos 30
-#define rangoPared 60 
+#define rangoPared 70 
 #define rangoLimite 45
 #define rangoMas 150
 //#define rangoSuperior 1000
