@@ -1,20 +1,21 @@
 // Constantes de velocidad
 #define velocidad1 140
-#define velocidad2 50
+#define velocidad2 60
 
 //Constantes de control
 //#define KP 0.20
 //#define KD 1.5
 //#define KI 0.000001 
-#define KP 0.20
-#define KD 1.5
+#define KP 1.4
+#define KD 0.08
 #define KI 0
 
 //Constante de rango en cm
-#define rangoMenos 30
-#define rangoLimite 35
-#define rangoMas 80
-#define rangoSuperior 100
+//#define rangoMenos 30
+#define rangoPared 60 
+#define rangoLimite 45
+#define rangoMas 150
+//#define rangoSuperior 1000
 
 #define rango1 5
 #define rango2 10
@@ -30,30 +31,30 @@
 
 //Constantes de giro
 #define giro180 342
-#define giro90  160
+#define giro90  165
 
 //Constantes de ERROR
-#define PORCENTAJE_ERR1  1
-#define PORCENTAJE_ERR2  0.9
-#define PORCENTAJE_ERR3  0.8
-#define PORCENTAJE_ERR4  0.7
-#define PORCENTAJE_ERR5  0.6
-#define PORCENTAJE_ERR6  0.5
-#define PORCENTAJE_ERR7  0.4
-#define PORCENTAJE_ERR8  0.3
-#define PORCENTAJE_ERR9  0.2
-#define PORCENTAJE_ERR10 0.1
+#define PORCENTAJE_ERR1  0.99
+#define PORCENTAJE_ERR2  0.89
+#define PORCENTAJE_ERR3  0.79
+#define PORCENTAJE_ERR4  0.69
+#define PORCENTAJE_ERR5  0.58
+#define PORCENTAJE_ERR6  0.48
+#define PORCENTAJE_ERR7  0.37
+#define PORCENTAJE_ERR8  0.27
+#define PORCENTAJE_ERR9  0.16
+#define PORCENTAJE_ERR10 0.14
 #define PORCENTAJE_ERR0  0
-#define PORCENTAJE_ERR11 -0.1
-#define PORCENTAJE_ERR12 -0.2
-#define PORCENTAJE_ERR13 -0.3
-#define PORCENTAJE_ERR14 -0.4
-#define PORCENTAJE_ERR15 -0.5
-#define PORCENTAJE_ERR16 -0.6
-#define PORCENTAJE_ERR17 -0.7
-#define PORCENTAJE_ERR18 -0.8
-#define PORCENTAJE_ERR19 -0.9
-#define PORCENTAJE_ERR20 -1
+#define PORCENTAJE_ERR11 -0.14
+#define PORCENTAJE_ERR12 -0.16
+#define PORCENTAJE_ERR13 -0.27
+#define PORCENTAJE_ERR14 -0.37
+#define PORCENTAJE_ERR15 -0.48
+#define PORCENTAJE_ERR16 -0.58
+#define PORCENTAJE_ERR17 -0.69
+#define PORCENTAJE_ERR18 -0.79
+#define PORCENTAJE_ERR19 -0.89
+#define PORCENTAJE_ERR20 -0.99
 
 
 

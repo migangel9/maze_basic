@@ -166,8 +166,14 @@ void girar(short limiteTiempo, boolean direccion, byte velocidad){///
   }
   for(;;){
     if((millis() - actual) > limiteTiempo){
-       paroTotal();
-       break;
+      paroTotal();
+        
+      analogWrite(pinMotorIzq1, velocidadGlobal);
+      analogWrite(pinMotorIzq2, 0);    
+      analogWrite(pinMotorDer1, velocidadGlobal);
+      analogWrite(pinMotorDer2, 0);
+      delay(300); 
+      break;
     }
   }
 }
@@ -177,7 +183,7 @@ void paraMotores() {
   analogWrite(pinMotorIzq2, -velocidadGlobal);
   analogWrite(pinMotorDer1, 0);  
   analogWrite(pinMotorDer2, -velocidadGlobal);
-  delayMicroseconds(3);
+  delay(40);
   paroTotal();  
 }
 
@@ -209,36 +215,45 @@ void paraMotor(byte pinMotor1,byte pinMotor2) {
 /*Funcion Basica Busca por Izquierda: Siempre decidira ir por el lado izquierdo*/
 void porIzquierda(long uDer, long uIzq, long uFront, long uBack){
   // vuelta 90° a la izq (No hay salida mas que a la izq)
- /* if (uFront <= rangoLimite && uIzq >= rangoSuperior){
-    delay(2000);
+ /* if (uFront <= rangoLimite && uIzq >= rangoMas){
+    delay(500);
     girar(giro90, false, velocidad1);
-    delay(2000);
-  }
-  // vuelta 90° a la der (No hay salida mas que a la der)
-  if (uFront <= rangoLimite && uDer >= rangoSuperior){
-    delay(2000);
-    girar(giro90, true, velocidad1);
-    delay(2000);
-  }
-  // Encontro dos caminos libres izq y der, gira por izq
-  if (uIzq && uDer >= rangoSuperior && uFront <= rangoLimite){
-    delay(2000);
+    delay(500);
+  }    
+ // Encontro tres caminos libres izq y der, gira por izq
+  if (uIzq >= rangoMas && uDer >= rangoMas && uFront >= rangoMas){
+    delay(500); 
     girar(giro90, false, velocidad1);
-    delay(2000);
-  }
-  // Encontro tres caminos libres izq y der, gira por izq
-  if (uIzq && uDer && uFront >= rangoSuperior){
-    delay(2000);
-    girar(giro90, false, velocidad1);
-    delay(2000);
+    delay(500);
   }*/
+  // Encontro dos caminos libres izq y der, gira por izq
+  /*if ((uIzq  >= rangoMas && uDer >= rangoMas) && uFront <= rangoLimite){
+    delay(500);
+    girar(giro90, false, velocidad1);
+    delay(500);
+  } */   
+  // vuelta 90° a la der (No hay salida mas que a la der)
+  if (uFront <= rangoLimite && uDer >= rangoMas && ((uIzq <= Rango + rango3) && (uIzq <= Rango - rango3)) ){
+    delay(500);
+    girar(giro90, true, velocidad1);
+    delay(500);
+  }
+
+  //Encontro 2 caminos frente y Izq
+  else if (uIzq >= rangoMas && uFront >= rangoMas){
+    delay(500);
+    girar(giro90, false, velocidad1);
+    delay(500);
+  }
+
   // Camino cerrado
   //if (((uIzq && uDer <= Rango) && (uIzq && uDer <= Rango-rango5)) && uFront <= rangoLimite)
-  if ( (uIzq && uDer >= (Rango - rango5)) && (uIzq && uDer <= (Rango + rango5)) &&  uFront <= rangoLimite){
+ // if ((uIzq >= (Rango - rango5) && uDer >= (Rango - rango5)) && (uIzq <= (Rango + rango5) && uDer <= (Rango + rango5)) &&  (uFront <= rangoLimite || uFront >= rangoSuperior)){
+ else if (uFront <= rangoLimite){    
     paraMotores();
-    delay(2000);
+    delay(500);
     girar(giro180, false, velocidad1);
-    delay(2000);
+    delay(500);
   }
 }
 
