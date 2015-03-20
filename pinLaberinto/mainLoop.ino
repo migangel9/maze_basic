@@ -5,11 +5,16 @@ void loop(){
       //long uBack = getDistancia(pinTrigBack, pinEchoBack);
       long uIzq = getDistancia(pinTrigIzq, pinEchoIzq);  
       long uDer = getDistancia(pinTrigDer, pinEchoDer);    
-      uIzq = uIzq - 20;
+      //uIzq = uIzq - 20;
       uDer = uDer - 20;
-      setCentrar(uIzq, uDer); 
-      //porIzquierda(uDer, uIzq, uFront, 0);
-      porDerecha(uDer, uIzq, uFront, 0);
+      setCentrar(uIzq, uDer);       
+      if (vaPorIzquierda){
+        porIzquierda(uDer, uIzq, uFront, 0);        
+      }      
+      else if (vaPorDerecha){
+        porDerecha(uDer, uIzq, uFront, 0);
+      }
+
       Serial.print("\t R: ");
       Serial.print(Rango);
       Serial.print(" \t");  
@@ -29,6 +34,7 @@ void loop(){
 }
 
 void inicializar(){
+  leeSwitch();
   velocidadGlobal = velocidad2;
   asignaErrores();  
   long uIzq;

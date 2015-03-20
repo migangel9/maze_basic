@@ -15,7 +15,7 @@
 #define rangoPared 70 
 #define rangoLimite 45
 #define rangoMas 150
-//#define rangoSuperior 1000
+#define rangoSuperior 30000
 
 #define rango1 5
 #define rango2 10
@@ -59,6 +59,9 @@
 
 
 /* Variables Globales */
+
+boolean vaPorIzquierda = false;
+boolean vaPorDerecha = false;
 
 //variables de control
 float Err = 0;

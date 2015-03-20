@@ -5,7 +5,8 @@ long getDistancia(byte pinTrig, byte pinEcho){
 	digitalWrite(pinTrig,LOW); /* Para cuestión de estabilización del sensor*/
 	delayMicroseconds(5);
 	digitalWrite(pinTrig, HIGH); /* envío del pulso ultrasónico*/
-  delayMicroseconds(10);
+  delayMicroseconds(5);
+  digitalWrite(pinTrig,LOW);
   tiempo = pulseIn(pinEcho, HIGH);  
   /*fórmula para calcular la distancia obteniendo un valor entero*/
   distancia = (tiempo / 2.9) / 2; // Cálculos en milímetros
@@ -178,6 +179,7 @@ void girar(short limiteTiempo, boolean direccion, byte velocidad){///
   }
 }
 
+/* Funcion que estabiliza las lecturas al iniciar el programa*/
 void estabilizar(){  
   unsigned long actual;
   actual = millis();
@@ -192,6 +194,7 @@ void estabilizar(){
   }
 }
 
+/* Funcion de frenado de motores */
 void paraMotores() {
   analogWrite(pinMotorIzq1, 0);
   analogWrite(pinMotorIzq2, -velocidadGlobal);
@@ -201,6 +204,7 @@ void paraMotores() {
   paroTotal();  
 }
 
+/*Funcion de paro total*/
 void paroTotal(){
   analogWrite(pinMotorIzq1, 0);
   analogWrite(pinMotorIzq2, 0);
@@ -229,95 +233,96 @@ void paraMotor(byte pinMotor1,byte pinMotor2) {
 /*Funcion Basica Busca por Izquierda: Siempre decidira ir por el lado izquierdo*/
 void porIzquierda(long uDer, long uIzq, long uFront, long uBack){
   // vuelta 90° a la der (No hay salida mas que a la der)
-  if (uFront <= rangoLimite && uDer >= rangoMas && uIzq <= rangoPared){
-    delay(500);
+  if (uFront <= rangoLimite && uDer >= rangoMas && uIzq <= rangoPared){    
     girar(giro90, true, velocidad1);  // gira derecha
     delay(500);
   }
   // vuelta 90° a la izq (No hay salida mas que a la izq)
-  else if (uFront <= rangoLimite && uDer <= rangoPared && uIzq >= rangoMas){
-    delay(500);
+  else if (uFront <= rangoLimite && uDer <= rangoPared && uIzq >= rangoMas){    
     girar(giro90, false, velocidad1);   //Gira Izquierda
     delay(500);
   }   
   // Encontro dos caminos libres izq y der, gira por izq
   else if (uFront <= rangoLimite && uDer >= rangoMas && uIzq  >= rangoMas){
-    delay(500);
     girar(giro90, false, velocidad1);    //Gira Izquierda
     delay(500);
   }    
   // Encontro tres caminos libres izq y der, gira por izq
   else if (uFront >= rangoMas && uDer >= rangoMas && uIzq >= rangoMas){
-    delay(500); 
     girar(giro90, false, velocidad1);
     delay(500);
   }     
   //Encontro 2 caminos frente y Izq
   else if (uFront >= rangoMas && uDer <= rangoPared && uIzq >= rangoMas){
-    delay(500);
     girar(giro90, false, velocidad1);
     //delay(500);
   }
   //Encontro 2 caminos frente y Der
-  else if (uFront >= rangoMas && uDer >= rangoMas && uIzq <= rangoPared){
-    delay(500);
+  else if (uFront >= rangoMas && uDer >= rangoMas && uIzq <= rangoPared){    
     //girar(giro90, false, velocidad1);
     //delay(500);
   }
   // Camino cerrado
   else if (uFront <= rangoLimite && uDer <= rangoPared && uIzq <= rangoPared){    
-    paraMotores();
-    delay(500);
+    retrocede(); 
     girar(giro180, false, velocidad1);
     delay(500);
+  }
+  else if (uFront <= rangoLimite || uFront > rangoSuperior){        
+    retrocede();  
   }
 }
 
 /*Funcion Basica Busca por derecha: Siempre decidira ir por el lado izquierdo*/
 void porDerecha(long uDer, long uIzq, long uFront, long uBack){
   // vuelta 90° a la der (No hay salida mas que a la der)
-  if (uFront <= rangoLimite && uDer >= rangoMas && uIzq <= rangoPared){
-    delay(500);
+  if (uFront <= rangoLimite && uDer >= rangoMas && uIzq <= rangoPared){    
     girar(giro90, true, velocidad1);  // gira derecha
     delay(500);
   }
   // vuelta 90° a la izq (No hay salida mas que a la izq)
-  else if (uFront <= rangoLimite && uDer <= rangoPared && uIzq >= rangoMas){
-    delay(500);
+  else if (uFront <= rangoLimite && uDer <= rangoPared && uIzq >= rangoMas){    
     girar(giro90, false, velocidad1);   //Gira Izquierda
     delay(500);
   }   
   // Encontro dos caminos libres izq y der, gira por der
-  else if (uFront <= rangoLimite && uDer >= rangoMas && uIzq  >= rangoMas){
-    delay(500);
+  else if (uFront <= rangoLimite && uDer >= rangoMas && uIzq  >= rangoMas){    
     girar(giro90, true, velocidad1);    //Gira derecha
     delay(500);
   }    
   // Encontro tres caminos libres izq y der, gira por izq
-  else if (uFront >= rangoMas && uDer >= rangoMas && uIzq >= rangoMas){
-    delay(500); 
+  else if (uFront >= rangoMas && uDer >= rangoMas && uIzq >= rangoMas){    
     girar(giro90, true, velocidad1);  //gira derecha
     delay(500);
   }     
   //Encontro 2 caminos frente y Izq
-  else if (uFront >= rangoMas && uDer <= rangoPared && uIzq >= rangoMas){
-    delay(500);
+  else if (uFront >= rangoMas && uDer <= rangoPared && uIzq >= rangoMas){    
    // girar(giro90, false, velocidad1);
     //delay(500);
   }
   //Encontro 2 caminos frente y Der
-  else if (uFront >= rangoMas && uDer >= rangoMas && uIzq <= rangoPared){
-    delay(500);
+  else if (uFront >= rangoMas && uDer >= rangoMas && uIzq <= rangoPared){    
     girar(giro90, true, velocidad1);
-    //delay(500);
+    delay(500);
   }
   // Camino cerrado
   else if (uFront <= rangoLimite && uDer <= rangoPared && uIzq <= rangoPared){    
-    paraMotores();
-    delay(500);
-    girar(giro180, false, velocidad1);
+    retrocede();  
+    girar(giro180, true, velocidad1);
     delay(500);
   }
+  else if (uFront <= rangoLimite || uFront > rangoSuperior){        
+    retrocede();  
+  }
+}
+
+/* Funcion para retroceder un poco */
+void retrocede(){
+  analogWrite(pinMotorIzq1, 0);
+  analogWrite(pinMotorIzq2, -velocidadGlobal);
+  analogWrite(pinMotorDer1, 0);  
+  analogWrite(pinMotorDer2, -velocidadGlobal);
+  delay(30);
 }
 
 /*Funcion para calcular los errores de acuerdo a la velocidad Global*/
@@ -343,4 +348,31 @@ void asignaErrores(){
   Err19 = (velocidadGlobal * PORCENTAJE_ERR19); 
   Err20 = (velocidadGlobal * PORCENTAJE_ERR20); 
   Err0 = (velocidadGlobal * PORCENTAJE_ERR0);  
+}
+
+void leeSwitch(){
+  if(digitalRead(pinSwitch1) == 0){
+    vaPorIzquierda = true;
+    vaPorDerecha = false;
+  }
+  else if(digitalRead(pinSwitch1) == 1){
+    vaPorIzquierda = false;
+    vaPorDerecha = true;
+  }   
+  /*if(digitalRead(pinSwitch1) == 0 && digitalRead(pinSwitch2) == 0){
+    porIzquierda = true;
+    porDerecha = false;
+  }
+  else if(digitalRead(pinSwitch1) == 1 && digitalRead(pinSwitch2) == 0){
+    porIzquierda = false;
+    porDerecha = true;
+  }  
+  else if(digitalRead(pinSwitch1) == 0 && digitalRead(pinSwitch2) == 1){
+    porIzquierda = true;
+    porDerecha = false;
+  }
+  else if(digitalRead(pinSwitch1) == 1 && digitalRead(pinSwitch2) == 1){
+    porIzquierda = false;
+    porDerecha = true;
+  }*/
 }
