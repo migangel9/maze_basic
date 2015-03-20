@@ -5,7 +5,7 @@ long getDistancia(byte pinTrig, byte pinEcho){
 	digitalWrite(pinTrig,LOW); /* Para cuestión de estabilización del sensor*/
 	delayMicroseconds(5);
 	digitalWrite(pinTrig, HIGH); /* envío del pulso ultrasónico*/
-  delayMicroseconds(5);
+  delayMicroseconds(10);
   digitalWrite(pinTrig,LOW);
   tiempo = pulseIn(pinEcho, HIGH);  
   /*fórmula para calcular la distancia obteniendo un valor entero*/
@@ -24,11 +24,11 @@ int getRango(int uIzq, int uDer){
 
 /* Funcion para ir en el centro del sendero */
 void setCentrar(long uIzq, long uDer){  
-  if (uIzq < rangoLimite){    
+  if (uIzq < (Rango - rango2)){    
     digitalWrite(pinLed1,HIGH);
     girarPID(uIzq, uDer);
   }
-  else if (uDer < rangoLimite){    
+  else if (uDer < (Rango - rango2)){    
     digitalWrite(pinLed2,HIGH);    
     girarPID(uIzq, uDer);
   }
@@ -268,9 +268,9 @@ void porIzquierda(long uDer, long uIzq, long uFront, long uBack){
     girar(giro180, false, velocidad1);
     delay(500);
   }
-  else if (uFront <= rangoLimite || uFront > rangoSuperior){        
+  /*else if (uFront <= rangoLimite || uFront > rangoSuperior){        
     retrocede();  
-  }
+  }*/
 }
 
 /*Funcion Basica Busca por derecha: Siempre decidira ir por el lado izquierdo*/
@@ -311,9 +311,9 @@ void porDerecha(long uDer, long uIzq, long uFront, long uBack){
     girar(giro180, true, velocidad1);
     delay(500);
   }
-  else if (uFront <= rangoLimite || uFront > rangoSuperior){        
+  /*else if (uFront <= rangoLimite || uFront > rangoSuperior){        
     retrocede();  
-  }
+  }*/
 }
 
 /* Funcion para retroceder un poco */

@@ -1,14 +1,14 @@
 void loop(){    
     estabilizar();
     for(;;){
-      long uFront = getDistancia(pinTrigFront, pinEchoFront);
+      long uFront = getDistancia(pinTrigFront, pinEchoFront);      
       //long uBack = getDistancia(pinTrigBack, pinEchoBack);
-      long uIzq = getDistancia(pinTrigIzq, pinEchoIzq);  
-      long uDer = getDistancia(pinTrigDer, pinEchoDer);    
+      long uIzq = getDistancia(pinTrigIzq, pinEchoIzq);        
+      long uDer = getDistancia(pinTrigDer, pinEchoDer);          
       //uIzq = uIzq - 20;
       uDer = uDer - 20;
       setCentrar(uIzq, uDer);       
-      if (vaPorIzquierda){
+      if(vaPorIzquierda){
         porIzquierda(uDer, uIzq, uFront, 0);        
       }      
       else if (vaPorDerecha){
@@ -23,7 +23,7 @@ void loop(){
       Serial.print(" mm\t");
       //Serial.print("B: "); 
       //Serial.print(uBack);
-      //Serial.print(" mm\t"); 
+      //Serial.print(" mm\t");
       Serial.print("I: ");
       Serial.print(uIzq);
       Serial.print(" mm\t");
